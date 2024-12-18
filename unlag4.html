@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accomodation view page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="home.css" />
+    <script src="home.js" defer></script>
+
+    <style>
+      /* General reset */
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        height: auto;
+      }
+      .main-body {
+        width: 100%;
+        height: auto;
+      }
+      .mainClass {
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            /* White color with transparency */ rgba(255, 255, 255, 0.5)
+              /* Adjust opacity as needed */
+          ),
+          url(images1/hostel7.jpeg);
+        overflow: hidden;
+        background-repeat: no-repeat;
+        width: 100%;
+        background-size: cover;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .mainClass img {
+        width: 50%;
+      }
+
+      /* Additional responsiveness for very small screens */
+      @media (max-width: 480px) {
+        .mainClass img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .time1 {
+        display: flex;
+        flex-direction: row;
+      }
+      #time1 {
+        margin-left: 15px;
+      }
+      .img {
+        display: flex;
+        flex-direction: row;
+        width: 20%;
+        height: 30%;
+      }
+      #img1 {
+        margin-left: 10%;
+      }
+      #img2 {
+        margin-left: 40%;
+      }
+      #text3 {
+        font-size: 36px;
+        font-weight: 700;
+      }
+      .text4 {
+        margin-bottom: 10px;
+      }
+      .f8 {
+        background-color: #f8f8f8;
+      }
+      .text4 {
+        font-size: 20px;
+        font-weight: 500;
+        font-family: "Poppins", sans-serif;
+        padding: 5px;
+      }
+      .text5 {
+        cursor: pointer; /* Cursor changes to pointer on hover */
+      }
+      .text5 a {
+        text-decoration: none;
+        font-size: 30px;
+        background-color: #3de144;
+        padding: 10px;
+        color: white;
+        transition: background-color 0.7s ease-in-out, padding 0.7s ease-in-out,
+          transform 0.7s ease-in-out;
+      }
+      #text51 {
+        margin-left: 10px;
+      }
+      #text52 {
+        margin-left: 20%;
+        color: black;
+        background-color: #f1eded;
+      }
+      #text51:hover {
+        background-color: green;
+        border-color: black;
+        color: black;
+        padding: 0.5rem 1rem;
+        transform: translateX(1rem);
+      }
+
+      #text52:hover {
+        background-color: gray;
+        border-color: black;
+        color: #ece6f0;
+        padding: 0.5rem 1rem;
+        transform: translateX(1rem);
+      }
+      .text6 {
+        margin-top: 10px;
+      }
+      .text7 {
+        display: flex;
+        flex-direction: row;
+      }
+      .text7 img {
+        margin-left: 20%;
+        width: 30px;
+        height: 30px;
+      }
+      .text8 a {
+        color: #3de144;
+      }
+      .text8 a:hover {
+        color: green;
+      }
+      .text8 img {
+        margin-left: 70%;
+        width: 30px;
+        height: 30px;
+      }
+      .text8 button {
+        width: 70%;
+        height: 45px;
+        background-color: #3de144;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-left: 15%;
+        color: #ece6f0;
+        border: none;
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+
+      /* Button Style */
+      #viewFeatureBtn {
+        padding: 10px 20px;
+        font-size: 25px;
+        color: #fff;
+        background-color: #3de144;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #viewFeatureBtn:hover {
+        background-color: green;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        width: 50%;
+        text-decoration: none;
+      }
+
+      .modal-content h2 {
+        margin-top: 0;
+      }
+      .modal-content ul {
+        background-color: #3de144;
+        text-decoration: none;
+        margin: 0;
+      }
+      .list li {
+        text-decoration: none;
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #333;
+      }
+
+      .close-btn:hover {
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <div class="main-body">
+    <body class="body">
+      <!-- The main nav link -->
+      <div class="body1">
+        <header>
+          <nav>
+            <input type="checkbox" id="check" />
+            <label for="check" class="menu">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-list-ul"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+                />
+              </svg>
+            </label>
+            <div class="logo">
+              <h1>SAPA</h1>
+            </div>
+            <!-- First div list -->
+
+            <div class="main-div">
+              <ul class="item">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="rent history.html">Rent History</a></li>
+                <li><a href="booking.html">Book Accomodation</a></li>
+                <li><a href="room.html">Find Roommates</a></li>
+              </ul>
+            </div>
+            <!-- Second div list -->
+            <div class="main-div">
+              <ul class="account">
+                <li><a href="login1.html">PROFILE</a></li>
+                <li><a href="set.html">SETTING</a></li>
+              </ul>
+            </div>
+          </nav>
+          <div class="search-bar">
+            <input type="text" placeholder="Enter keyword here" id="type" />
+            <button onclick="searchSchool()" class="searchClass" id="button1">
+              <i class="fa-solid fa-search"></i>
+              <!-- Search icon inside button -->
+            </button>
+          </div>
+        </header>
+
+        <div class="mainClass">
+          <img src="images1/hostel7.jpeg" />
+        </div>
+      </div>
+      <div class="f8">
+        <div>
+          <p>
+            Posted by Sabi Lanlord
+            <a href="#"><i class="fa-solid fa-star"></i></a>
+          </p>
+          <div class="time1">
+            <p><i class="fa-regular fa-calendar-days"></i> 4th Dec.2024</p>
+            <p id="time1"><i class="fa-regular fa-clock"></i>9:26pm</p>
+          </div>
+        </div>
+        <div class="img">
+          <img src="images1/hostel7.1.jpeg" id="img1" />
+          <img src="images1/hostel7.2.jpeg" id="img2" />
+        </div>
+        <div>
+          <h3 id="text3">Tiled Single Room Self Contain</h3>
+          <p class="text4">
+            <i class="fa-solid fa-location-dot"></i> Akoka Campus, Yaba, Lagos
+          </p>
+          <p class="text4">
+            Annual Rent <i class="fa-solid fa-naira-sign"></i>250,000
+          </p>
+        </div>
+        <div class="text5">
+          <button id="viewFeatureBtn">View Feature</button>
+
+          <!-- Popup Modal -->
+          <div id="featureModal" class="modal">
+            <div class="modal-content">
+              <span class="close-btn">&times;</span>
+              <h2>Feature List</h2>
+              <ul class="list">
+                <li>Tiled</li>
+                <li>Serene Enviroment</li>
+                <li>10min Walk from School Gate</li>
+                <li>Adequate Water Supply and Electricity</li>
+                <li>Water Runs Inside</li>
+                <li>Utility Bill Included in Rent for One Year</li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="#" id="text52"
+            >Available <i class="fa-solid fa-check"></i
+          ></a>
+        </div>
+        <div class="text6">
+          <h2>Ratings and Reviews</h2>
+          <div class="text7">
+            <p>
+              Ratings and reviews are given by who have previously rented
+              accomodations in the same house
+            </p>
+            <img src="images1/tele.jpeg" />
+          </div>
+          <div class="text8">
+            <p>4.5 from 2 ratings</p>
+            <a href="#">View ratings</a>
+            <img src="images1/message.png" />
+            <button>Rent Accomodation</button>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Section -->
+      <footer class="footer">
+        <div class="footer-links">
+          <a href="contactUs.html">Contact Us</a>
+          <a href="term.html">Terms and Conditions</a>
+          <a href="privacy.html">Privacy Notice</a>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              fill="currentColor"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-2.95-.49-5.31-2.85-5.8-5.8H5v-2h.2C6.69 8.42 8.42 6.69 11 6.2V5h2v1.2c2.58.49 4.31 2.22 4.8 4.8H19v2h-.2c-.49 2.95-2.85 5.31-5.8 5.8V19h-2v.93zM13 12h-2v-2h2v2zm0 4h-2v-2h2v2z"
+              />
+            </svg>
+            2024 All rights reserved.
+          </span>
+        </div>
+      </footer>
+    </body>
+  </div>
+  <script>
+    // Get elements
+    const viewFeatureBtn = document.getElementById("viewFeatureBtn");
+    const featureModal = document.getElementById("featureModal");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // Show the modal when the button is clicked
+    viewFeatureBtn.addEventListener("click", () => {
+      featureModal.style.display = "flex";
+    });
+
+    // Hide the modal when the close button is clicked
+    closeBtn.addEventListener("click", () => {
+      featureModal.style.display = "none";
+    });
+
+    // Hide the modal when clicking outside the modal content
+    window.addEventListener("click", (event) => {
+      if (event.target === featureModal) {
+        featureModal.style.display = "none";
+      }
+    });
+  </script>
+</html>

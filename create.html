@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGN UP</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <style>
+    /* Add your styles here */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: white;
+      text-align: center;
+    }
+
+    .wrapper {
+      box-shadow: none;
+      color: aliceblue;
+      border-radius: 4px;
+      padding: 30px 40px;
+      text-align: center;
+      justify-content: center;
+      background-position: center;
+    }
+
+    .wrapper h2 {
+      font-size: 30px;
+      text-align: center;
+      color: black;
+    }
+
+    .wrapper .input-box {
+      width: 100%;
+      height: 50px;
+      margin: 40px 0;
+    }
+
+    .input-box .input-field {
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      border: 2px solid #3ed144;
+      border-radius: 4px;
+      font-size: 17px;
+      color: black;
+      padding: 0 15px;
+      margin: 30px 0;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .input-box input::placeholder {
+      color: black;
+      font-weight: 500;
+    }
+
+    .input-submit {
+      text-align: center;
+    }
+
+    .submit-btn {
+      width: 200px;
+      height: 50px;
+      background: #3ed144;
+      border: none;
+      outline: none;
+      border-radius: 4px;
+      transition: 0.3s;
+      font-size: 29px;
+      font-weight: 600;
+      margin: 30px 0;
+      position: relative;
+      justify-content: center;
+    }
+
+    .submit-btn:hover {
+      background: black;
+    }
+
+    footer {
+      gap: 12rem;
+      padding: 1rem;
+    }
+
+    footer p {
+      font-size: 25px;
+      font-weight: 400;
+      text-align: center;
+      color: black;
+    }
+  </style>
+
+  <body>
+    <div class="wrapper">
+      <form id="signupForm">
+        <h2>Students Registration</h2>
+
+        <!-- Name Field -->
+        <div class="input-box">
+          <input
+            type="text"
+            id="name"
+            class="input-field"
+            placeholder="Enter your Name"
+            required
+          />
+        </div>
+
+        <!-- Email Field -->
+        <div class="input-box">
+          <input
+            type="email"
+            id="email"
+            class="input-field"
+            placeholder="Enter email address"
+            required
+          />
+        </div>
+
+        <!-- Password Field -->
+        <div class="input-box">
+          <input
+            type="password"
+            id="password"
+            class="input-field"
+            placeholder="Enter Password"
+            required
+          />
+        </div>
+
+        <footer>
+          <div class="divider">
+            <span>OR</span>
+          </div>
+          <p>Sign up with Google <img src="images1/google.jpeg" alt="Google" /></p>
+        </footer>
+
+        <!-- Submit Button -->
+        <div class="input-submit">
+          <button class="submit-btn" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Handle form submission
+      document.getElementById('signupForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Validate inputs
+        if (!name || !email || !password) {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Please fill in all fields.',
+            icon: 'error',
+          });
+          return;
+        }
+
+        // Prepare data to send
+        const formData = { name, email, password };
+
+        try {
+          // Send POST request to the backend (change URL as needed)
+          const response = await fetch('http://localhost:8888/v1/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            Swal.fire({
+              title: 'Registration successful!',
+              text: data.message || 'You have successfully registered.',
+              icon: 'success',
+            }).then(() => {
+              // Redirect to index.html after successful registration
+              window.location.href = 'index.html'; // This line redirects to index.html
+            });
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: data.message || 'Something went wrong during registration.',
+              icon: 'error',
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: 'Error!',
+            text: 'There was an issue connecting to the server.',
+            icon: 'error',
+          });
+          console.error('Error submitting form:', error);
+        }
+      });
+    </script>
+  </body>
+</html>
