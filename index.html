@@ -245,7 +245,7 @@
         const formData = { email, password };
 
         try {
-          const response = await fetch("http://localhost:8888/v1/users/login", {
+          const response = await fetch("bk-project-alpha.vercel.app/v1/users/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
