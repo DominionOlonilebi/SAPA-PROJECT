@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Add Font Awesome CDN for the eye icon (for password visibility toggle) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     <style>
       /* Global Styles */
       * {
@@ -160,14 +162,14 @@
   </head>
   <body>
     <div class="login-container">
-      <div class="main-login">
+      <div class="main-login" id="login-container">
         <h2>Login Page</h2>
-        <form id="loginForm">
+        <form id="login-form">
           <!-- Email Field -->
           <div class="input-box">
             <input
               type="email"
-              id="email"
+              id="login-email"
               class="input-field"
               placeholder="Enter Email Address"
               required
@@ -178,7 +180,7 @@
           <div class="input-box password-container">
             <input
               type="password"
-              id="password"
+              id="login-password"
               class="input-field"
               placeholder="Enter Password"
               required
@@ -198,6 +200,7 @@
             <p>
               Don't have an account? <a href="create.html">Create Account</a>
             </p>
+            <div class="error" id="login-error-message"></div>
           </div>
         </form>
       </div>
@@ -210,16 +213,15 @@
     </div>
 
     <script>
-      // Handle form submission and data sending
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", submitHandler);
-
-      async function submitHandler(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+      const loginForm = document.getElementById('login-form');
+      const loginErrorMessage = document.getElementById('login-error-message');
+  
+      // Login Form Submission
+      loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+  
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
 
         // Form validation
         if (email === "" || password === "") {
@@ -241,18 +243,16 @@
           });
           return;
         }
-
-        const formData = { email, password };
-
+  
         try {
-          const response = await fetch("https://student-log.onrender.com/login", {
-            method: "POST",
+          const response = await fetch('https://student-log.onrender.com/login', {
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify({ email, password }),
           });
-
+  
           const data = await response.json();
 
           if (response.ok) {
@@ -266,7 +266,7 @@
           } else {
             Swal.fire({
               title: "Error!",
-              text: data.message || "Something went wrong!",
+              text: data.message || "Login Failed!",
               icon: "error",
             });
           }
@@ -278,11 +278,11 @@
           });
           console.error("Error submitting form:", error);
         }
-      }
+      });
 
       // Toggle password visibility
       function togglePasswordVisibility() {
-        const passwordField = document.getElementById("password");
+        const passwordField = document.getElementById("login-password");
         const passwordIcon = document.getElementById("showPassword");
 
         if (passwordField.type === "password") {
