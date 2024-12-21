@@ -93,9 +93,9 @@ nav svg,
     padding: 2rem;
     transition: all ease-in-out 500ms;
   }
-}
 
-/* .item,
+
+    .item,
     .account {
       flex-direction: column;
       width: auto;
@@ -114,7 +114,8 @@ nav svg,
     }
     nav a {
       display: inline-block;
-    } */
+    } 
+  }
 nav a:hover {
   margin-left: 2px;
   transition: all ease-in-out 300ms;
