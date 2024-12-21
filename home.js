@@ -1,5 +1,6 @@
-function toggleDropdown() {
-  // Toggle 'active' class on the dropdown to show/hide the menu
-  var dropdown = document.querySelector(".dropdown");
-  dropdown.classList.toggle("active");
-}
+const navIcon = document.getElementById('nav-icon');
+const mainDiv = document.querySelector('.main-div');
+
+navIcon.addEventListener('click', () => {
+  mainDiv.classList.toggle('active'); // Toggle the "active" class
+});
